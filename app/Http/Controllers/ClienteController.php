@@ -41,6 +41,18 @@ class ClienteController extends Controller
     }
 
     /**
+     * Edit the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateClienteRequest  $request
+     * @param  \App\Models\Cliente  $cliente
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(UpdateClienteRequest $request, Cliente $cliente)
+    {
+        //
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateClienteRequest  $request
