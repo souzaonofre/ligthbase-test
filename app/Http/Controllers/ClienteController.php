@@ -41,7 +41,7 @@ class ClienteController extends Controller
             return response()->json([
                 'message' => 'Erro de sistema, favor contactar suporte.'
             ], 500);
-        }./
+        }
     }
 
     /**
