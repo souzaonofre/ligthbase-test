@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
+use App\Resources\ClienteResource;
+use App\Resources\ClienteCollection;
 use App\Models\Cliente;
-use Illuminate\Http\Request;
+
 
 class ClienteController extends Controller
 {
@@ -28,7 +32,16 @@ class ClienteController extends Controller
      */
     public function novoCliente(StoreClienteRequest $request)
     {
-        //
+        $clienteData = $request->validated();
+        $clienteModel = $clienteData ? Produto::create($clienteData) : null;
+
+        if ($clienteModel && $clienteModel->save()) {
+            return new ClienteResource($clienteModel);
+        } else {
+            return response()->json([
+                'message' => 'Erro de sistema, favor contactar suporte.'
+            ], 500);
+        }./
     }
 
     /**
@@ -40,7 +53,15 @@ class ClienteController extends Controller
      */
     public function consultarCliente(Request $request, int $id)
     {
-        //
+        $cliente = Cliente::find($id);
+
+        if ($cliente) {
+            return new ClienteResource($cliente);
+        } else {
+            return response()->json([
+                'message' => 'Cliente não encontrado.'
+            ], 404);
+        }    
     }
 
     /**
@@ -52,7 +73,18 @@ class ClienteController extends Controller
      */
     public function edit(UpdateClienteRequest $request, int $id)
     {
-        //
+        $clienteData = $request->validated();
+    
+        $clienteModel = Cliente::where('id', $id)->update($clienteData);
+
+        if ($clienteModel && $clienteModel->save()) {
+            return new ClienteResource($clienteModel);
+            
+        } else {
+            return response()->json([
+                'message' => 'Erro de sistema, favor contactar suporte.'
+            ], 500);
+        }
     }
 
     // /**
@@ -74,9 +106,19 @@ class ClienteController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function removerCliente(Request $request, int $numero)
+    public function removerCliente(Request $request, int $id)
     {
-        //
+        $cliente = Cliente::delete($id);
+
+        if ($cliente) {
+            return response()->json([
+                'message' => 'Cliente removido com sucesso.'
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Falha de sistema.'
+            ], 500);
+        }    
     }
 
     /**
@@ -88,7 +130,17 @@ class ClienteController extends Controller
      */
     public function consultarPlaca(Request $request, string $numero)
     {
-        //
+        $clientes = DB::table((new Cliente())->getTable())
+            ->whereRaw('placa_carro LIKE %?%', [$numero])
+            ->get();
+
+        if ($clientes) {
+            return new ClienteCollection($clientes);
+        } else {
+            return response()->json([
+                'message' => 'Falha de sistema.'
+            ], 500);
+        }    
     }
 
 }
