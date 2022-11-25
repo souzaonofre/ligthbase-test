@@ -28,7 +28,16 @@ class ClienteController extends Controller
      */
     public function novoCliente(StoreClienteRequest $request)
     {
-        //
+        $clienteData = $request->validated();
+        $clienteModel = $clienteData ? Produto::create($clienteData) : null;
+
+        if ($clienteModel && $clienteModel->save()) {
+            return new ClienteResource($clienteModel);
+        } else {
+            return response()->json([
+                'message' => 'Erro de sistema, favor contactar suporte.'
+            ], 500);
+        }
     }
 
     /**
@@ -40,7 +49,13 @@ class ClienteController extends Controller
      */
     public function consultarCliente(Request $request, int $id)
     {
-        //
+        $cliente = Cliente::find($id);
+
+        if ($cliente) {
+            return new ClienteResource($cliente);
+        } else {
+            throw new NotFoundHttpException('Produto não encontrado');
+        }    
     }
 
     /**
