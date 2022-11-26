@@ -51,7 +51,7 @@ class ClienteController extends Controller
      */
     public function consultarCliente(Request $request, mixed $id)
     {
-        if (!isset($id) || !is_int($id)) {
+        if (!isset($id) || !is_numeric($id) || intval($id) <= 0) {
             return response()->json([
                 'message' => sprintf('id=[%s], parametro invalido.', $id),
             ], 422);
