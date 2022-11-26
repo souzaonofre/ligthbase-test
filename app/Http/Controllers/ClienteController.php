@@ -12,15 +12,15 @@ use Illuminate\Support\Facades\DB;
 
 class ClienteController extends Controller
 {
-    // /**
-    //  * Display a listing of the resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function index()
-    // {
-    //     //
-    // }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Resources\Json\ResourceCollection
+     */
+    public function listarClientes()
+    {
+        return new ClienteCollection(Cliente::all());
+    }
 
     /**
      * Cadastro novo Cliente.
@@ -69,13 +69,13 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(UpdateClienteRequest $request, int $id)
+    public function editarCliente(UpdateClienteRequest $request, int $id)
     {
         $clienteData = $request->validated();
 
-        $clienteModel = Cliente::where('id', $id)->update($clienteData);
+        $clienteModel = Cliente::where('id', $id)->first();
 
-        if ($clienteModel && $clienteModel->save()) {
+        if ($clienteModel && $clienteModel->update($clienteData)) {
             return new ClienteResource($clienteModel);
         } else {
             return response()->json([

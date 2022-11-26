@@ -20,18 +20,21 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::controller(ClienteController::class)->group(function () {
-    Route::post('/cliente', 'novoCliente')
+    Route::get('cliente', 'listarClientes')
+        ->name('cliente.listarClientes');
+
+    Route::post('cliente', 'novoCliente')
         ->name('cliente.novoCliente');
 
-    Route::put('/cliente/{id}', 'editarCliente')
+    Route::put('cliente/{id}', 'editarCliente')
         ->name('cliente.editarCliente');
 
-    Route::delete('/cliente/{id}', 'removerCliente')
+    Route::delete('cliente/{id}', 'removerCliente')
         ->name('cliente.removerCliente');
 
-    Route::get('/cliente/{id}', 'consultarCliente')
+    Route::get('cliente/{id}', 'consultarCliente')
         ->name('cliente.consultarCliente');
 
-    Route::get('/cliente/final-placa/{numero}', 'consultarPlaca')
+    Route::get('cliente/final-placa/{numero}', 'consultarPlaca')
         ->name('cliente.consultarPlaca');
 });
