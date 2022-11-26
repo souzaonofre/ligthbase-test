@@ -46,14 +46,14 @@ class ClienteController extends Controller
      * Consulta dados de um Cliente
      *
      * @param  \\Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  mixed  $id
      * @return \Illuminate\Http\Response
      */
-    public function consultarCliente(Request $request, int $id)
+    public function consultarCliente(Request $request, mixed $id)
     {
-        if (!isset($id) || is_int($id)) {
+        if (!isset($id) || !is_int($id)) {
             return response()->json([
-                'message' => 'Paramentro "id" invalido.',
+                'message' => sprintf('id=[%s], parametro invalido.', $id),
             ], 422);
         }
 
@@ -128,14 +128,14 @@ class ClienteController extends Controller
      * Consulta dados de Clientes onde ultimo numero placa seja igual informado.
      *
      * @param  \\Illuminate\Http\Request  $request
-     * @param  int  $numero
+     * @param  mixed  $numero
      * @return \Illuminate\Http\Response
      */
-    public function consultarPlaca(Request $request, int $numero)
+    public function consultarPlaca(Request $request, mixed $numero)
     {
         if (!isset($numero) || !is_numeric($numero) || strlen(strval($numero)) > 1) {
             return response()->json([
-                'message' => 'Paramentro "numero" invalido.',
+                'message' => sprintf('numero=[%s], parametro invalido!', $numero),
             ], 422);
         }
 
