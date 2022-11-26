@@ -4,6 +4,7 @@ namespace Tests\Feature\Http\Controllers;
 
 use Tests\TestCase;
 use App\Models\Cliente;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -86,5 +87,34 @@ class ClienteControllerTest extends TestCase
 
     }
 
+    /**
+     * Teste Consultar Placa.
+     *
+     * @return void
+     */
+    public function test_consultar_placa()
+    {
+        $clienteFakeAllData = Cliente::factory(10)->raw();
+        //dd($clienteFakeAllData);
+
+        $ultimoNumeroPlaca = '1';
+
+        $resultadoComp = DB::table((new Cliente())->getTable())
+            ->whereRaw(' LOCATE(?, `placa_carro`) = 8', [$ultimoNumeroPlaca])
+            ->get()->toArray();
+
+        $uri = sprintf('/api/cliente/final-placa/%s', $ultimoNumeroPlaca);
+        $response = $this->getJson($uri);
+
+        $response->assertStatus(200);
+
+        $resultado = $response->json();
+        //dd($resultado);
+
+        $this->assertTrue(is_array($resultado) && (count($resultado) == count($resultadoComp)));
+
+        $response->dump();
+
+    }
 
 }
