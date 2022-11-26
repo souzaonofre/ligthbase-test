@@ -37,6 +37,37 @@ class ClienteControllerTest extends TestCase
         $response->dump();
     }
 
+    /**
+     * Teste Editar um Cliente
+     *
+     * @return void
+     */
+    public function test_editar_cliente()
+    {
+        $clienteFake = Cliente::factory()->createOne();
+        $clienteFakeData = ($clienteFake->get(['nome', 'telefone', 'cpf', 'placa_carro'])[0])->toArray();
+
+        $novoNome = 'Fulano de Tal';
+        $clienteFakeData['nome'] = $novoNome;
+
+        $novaPlaca = 'BRA 3223';
+        $clienteFakeData['placa_carro'] = $novaPlaca;
+
+        $id = $clienteFake->get()[0]->id;
+        $uri = sprintf('/api/cliente/%s', $id);
+
+        $response = $this->putJson($uri, $clienteFakeData);
+
+        $response->assertStatus(200);
+
+        $response->assertJson(function(AssertableJson $json) use ($clienteFakeData) {
+            $json->where('nome', $clienteFakeData['nome'])
+                ->where('placa_carro', $clienteFakeData['placa_carro'])
+                ->etc();
+        });
+
+        $response->dump();
+    }
 
     /**
      * Teste Consultar Cliente.
