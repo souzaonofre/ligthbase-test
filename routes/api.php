@@ -20,21 +20,21 @@ use App\Http\Controllers\ClienteController;
 //     return $request->user();
 // });
 
-Route::controller(ClienteController::class)->group(function ($router) {
+Route::controller(ClienteController::class)->group(function() {
 
-    $router->post('/cliente', 'novoCliente')
+    Route::post('/cliente', 'novoCliente')
         ->name('cliente.novoCliente');
 
-    $router->put('/cliente/{id}', 'editarCliente')
+    Route::put('/cliente/{id}', 'editarCliente')
         ->name('cliente.editarCliente');
 
-    $router->delete('/cliente/{id}', 'removerCliente')
+    Route::delete('/cliente/{id}', 'removerCliente')
         ->name('cliente.removerCliente');
 
-    $router->get('/cliente/{id}', 'consultarCliente')
+    Route::get('/cliente/{id}', 'consultarCliente')
         ->name('cliente.consultarCliente');
 
-    $router->get('/cliente/final-placa/{numero}', 'consultarPlaca')
+    Route::get('/cliente/final-placa/{numero}', 'consultarPlaca')
         ->name('cliente.consultarPlaca');
 
 });
