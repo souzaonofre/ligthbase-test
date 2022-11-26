@@ -1,9 +1,8 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\ClienteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +19,7 @@ use App\Http\Controllers\ClienteController;
 //     return $request->user();
 // });
 
-Route::controller(ClienteController::class)->group(function() {
-
+Route::controller(ClienteController::class)->group(function () {
     Route::post('/cliente', 'novoCliente')
         ->name('cliente.novoCliente');
 
@@ -36,5 +34,4 @@ Route::controller(ClienteController::class)->group(function() {
 
     Route::get('/cliente/final-placa/{numero}', 'consultarPlaca')
         ->name('cliente.consultarPlaca');
-
 });

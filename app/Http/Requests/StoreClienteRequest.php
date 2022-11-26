@@ -24,13 +24,13 @@ class StoreClienteRequest extends FormRequest
     public function rules()
     {
         return [
-           'nome' => 'required|string|unique:clientes',
-           'telefone' => 'required|string|max:25',
-           'cpf' => 'required|string|max:15',
-           'placa_carro' => 'required|string|max:10'
+            'nome' => 'required|string|unique:clientes',
+            'telefone' => 'required|string|max:25',
+            'cpf' => 'required|string|max:15',
+            'placa_carro' => 'required|string|max:10',
         ];
     }
-    
+
     /**
      * Get the error messages for the defined validation rules.
      *
@@ -43,8 +43,7 @@ class StoreClienteRequest extends FormRequest
             'nome.unique' => '[nome] do cliente não pode ser repetido',
             'telefone.required' => '[telefone] do cliente é requerido',
             'cpf.required' => '[cpf] do cliente é necessária',
-            'placa_carro.required' => '[placa_carro] é necessária'
+            'placa_carro.required' => '[placa_carro] é necessária',
         ];
     }
-    
 }

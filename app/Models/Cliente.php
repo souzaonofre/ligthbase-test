@@ -25,7 +25,7 @@ class Cliente extends Model
         'nome',
         'telefone',
         'cpf',
-        'placa_carro'
+        'placa_carro',
     ];
 
     /**
@@ -37,5 +37,4 @@ class Cliente extends Model
         'created_at',
         'updated_at',
     ];
-
 }

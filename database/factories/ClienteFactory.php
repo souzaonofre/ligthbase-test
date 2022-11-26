@@ -13,19 +13,18 @@ class ClienteFactory extends Factory
     {
         $placaCarro = [];
 
-        for ($i=1; $i <=3; $i++) {
+        for ($i = 1; $i <= 3; $i++) {
             array_push($placaCarro, strtoupper(fake()->randomLetter()));
         }
 
         array_push($placaCarro, ' ');
 
-        for ($i=1; $i <=4; $i++) {
+        for ($i = 1; $i <= 4; $i++) {
             array_push($placaCarro, strval(fake()->randomDigit()));
         }
 
-        return join('', $placaCarro);
+        return implode('', $placaCarro);
     }
-
 
     /**
      * Define the model's default state.
@@ -38,7 +37,7 @@ class ClienteFactory extends Factory
             'nome' => fake()->unique()->name(),
             'telefone' => fake()->phoneNumber(),
             'cpf' => fake()->randomNumber(11),
-            'placa_carro' => $this->gerarPlacaCarro()
+            'placa_carro' => $this->gerarPlacaCarro(),
         ];
     }
 }

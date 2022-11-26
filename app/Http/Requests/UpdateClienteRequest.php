@@ -24,13 +24,13 @@ class UpdateClienteRequest extends FormRequest
     public function rules()
     {
         return [
-           'nome' => 'string|unique:clientes',
-           'telefone' => 'string|max:25',
-           'cpf' => 'string|max:15',
-           'placa_carro' => 'string|max:10'
+            'nome' => 'string|unique:clientes',
+            'telefone' => 'string|max:25',
+            'cpf' => 'string|max:15',
+            'placa_carro' => 'string|max:10',
         ];
     }
-    
+
     /**
      * Get the error messages for the defined validation rules.
      *
@@ -42,5 +42,4 @@ class UpdateClienteRequest extends FormRequest
             'nome.unique' => '[nome] do cliente não pode ser repetido',
         ];
     }
-
 }

@@ -19,7 +19,7 @@ class ClienteResource extends JsonResource
             'nome' => $this->nome,
             'telefone' => $this->telefone,
             'cpf' => $this->cpf,
-            'placa_carro' => $this->placa_carro
+            'placa_carro' => $this->placa_carro,
         ];
     }
 }
