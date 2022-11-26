@@ -31,7 +31,7 @@ class ClienteFactory extends Factory
         $cpf = [];
 
         for ($i = 1; $i <= 11; $i++) {
-            array_push($cpf, strtoupper(fake()->randomNumber()));
+            array_push($cpf, strtoupper(fake()->randomDigit()));
         }
 
         return join('', $cpf);
