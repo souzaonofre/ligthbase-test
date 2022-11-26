@@ -128,7 +128,7 @@ class ClienteController extends Controller
     public function consultarPlaca(Request $request, string $numero)
     {
         $clientes = DB::table((new Cliente())->getTable())
-            ->whereRaw('placa_carro LIKE %?%', [$numero])
+            ->whereRaw(' LOCATE(?, `placa_carro`) = 8', [$numero])
             ->get();
 
         if ($clientes) {
