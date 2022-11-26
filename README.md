@@ -9,7 +9,7 @@ Você precisará construir uma base de dados com os seguintes campos:
     Telefone;
     CPF;
     Placa do Carro.
-    
+
 
 ## Endpoints Implementados
 
@@ -26,7 +26,15 @@ Você precisará construir uma base de dados com os seguintes campos:
     DELETE  /api/cliente/{id}                   -> ClienteController@removerCliente
 
 
-## Instalacão e Operacão e Teste
+## Instalacão, Operacão e Teste
+
+### Requisitos basicos para testar o codigo do projeto
+
+- Git 
+- Terminal Git-Bash p/ Windows e Mac
+- PHP >= 8.0
+- PHP Composer
+- Docker, Docker Engine ou Docker desktop
 
 
 ### Baixar codigo do projeto
@@ -35,6 +43,11 @@ Você precisará construir uma base de dados com os seguintes campos:
 
 > cd ligthbase-test
 
+
+### Instalar dependencias para testes do projeto
+
+
+> composer install
 
 ### Configurar variaveis de ambiente
 
