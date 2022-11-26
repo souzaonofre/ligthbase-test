@@ -51,6 +51,12 @@ class ClienteController extends Controller
      */
     public function consultarCliente(Request $request, int $id)
     {
+        if (!isset($id) || is_int($id)) {
+            return response()->json([
+                'message' => 'Paramentro "id" invalido.',
+            ], 422);
+        }
+
         $cliente = Cliente::find($id);
 
         if ($cliente) {
@@ -122,11 +128,17 @@ class ClienteController extends Controller
      * Consulta dados de Clientes onde ultimo numero placa seja igual informado.
      *
      * @param  \\Illuminate\Http\Request  $request
-     * @param  string  $numero
+     * @param  int  $numero
      * @return \Illuminate\Http\Response
      */
-    public function consultarPlaca(Request $request, string $numero)
+    public function consultarPlaca(Request $request, int $numero)
     {
+        if (!isset($numero) || !is_numeric($numero) || strlen(strval($numero)) > 1) {
+            return response()->json([
+                'message' => 'Paramentro "numero" invalido.',
+            ], 422);
+        }
+
         $clientes = DB::table((new Cliente())->getTable())
             ->whereRaw(' LOCATE(?, `placa_carro`) = 8', [$numero])
             ->get();
