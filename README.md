@@ -36,6 +36,7 @@ Você precisará construir uma base de dados com os seguintes campos:
 - PHP Composer
 - Docker, Docker Engine ou Docker desktop
 
+Obs.: Todos os comandos abaixo devem ser executados no Terminal(Linux) ou Git-Bash(Windows/Mac).
 
 ### Baixar codigo do projeto
 
@@ -43,11 +44,6 @@ Você precisará construir uma base de dados com os seguintes campos:
 
 > cd ligthbase-test
 
-
-### Instalar dependencias para testes do projeto
-
-
-> composer install
 
 ### Configurar variaveis de ambiente
 
@@ -57,6 +53,11 @@ Você precisará construir uma base de dados com os seguintes campos:
 ### Montar e executar servicos no Docker via sail command
 
 > ./vendor/laravel/sail/bin/sail up -d
+
+
+### Instalar dependencias para testes do projeto
+
+> ./vendor/laravel/sail/bin/sail composer install
 
 
 ### Verificar o funcionamento do App via sail command
