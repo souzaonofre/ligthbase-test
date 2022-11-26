@@ -26,6 +26,19 @@ class ClienteFactory extends Factory
         return implode('', $placaCarro);
     }
 
+    protected function gerarCpf()
+    {
+        $cpf = [];
+
+        for ($i = 1; $i <= 11; $i++) {
+            array_push($cpf, strtoupper(fake()->randomNumber()));
+        }
+
+        return join('', $cpf);
+    }
+
+
+
     /**
      * Define the model's default state.
      *
@@ -36,7 +49,7 @@ class ClienteFactory extends Factory
         return [
             'nome' => fake()->unique()->name(),
             'telefone' => fake()->phoneNumber(),
-            'cpf' => fake()->randomNumber(11),
+            'cpf' => $this->gerarCpf(),
             'placa_carro' => $this->gerarPlacaCarro(),
         ];
     }
